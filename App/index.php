@@ -16,7 +16,7 @@ session_start();
    <section class="content-header">
       <h1>
         Perfil
-        <small>A&S Sas | Admin</small>
+        <small>Ferretería FerroCoyot | Admin</small>
       </h1>
       <ol class="breadcrumb">
         <li class="active"><a href="index.php"><i class="fa fa-home"></i> Inicio</a></li>

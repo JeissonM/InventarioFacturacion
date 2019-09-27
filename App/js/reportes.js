@@ -1,7 +1,3 @@
-//var urlg="http://contabilidad.acuerdosysolucionessas.com/App";
-var urlg="http://localhost/Inventario/App";
-
-
 function ivaGGConsulta(){
   ivaGG();
 }

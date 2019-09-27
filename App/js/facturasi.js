@@ -1,5 +1,3 @@
-//var urlg="http://contabilidad.acuerdosysolucionessas.com/App";
-var urlg="http://localhost/Inventario/App";
 function mensage(msg, tipo, capa){
     if (!document.getElementById("msjinterno")){
       var midiv = document.createElement("div");

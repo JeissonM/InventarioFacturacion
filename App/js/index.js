@@ -1,5 +1,3 @@
-//var urlg="http://contabilidad.acuerdosysolucionessas.com/App";
-var urlg="http://localhost/Inventario/App";
 function modificar(){
     var id = document.act.id.value;
     var nom = document.act.nom.value;

@@ -1,6 +1,3 @@
-//var urlg="http://contabilidad.acuerdosysolucionessas.com/App";
-var urlg="http://localhost/Inventario/App";
-
 function enviar(id){
     var para = $('#size').val();
     var de=id;
