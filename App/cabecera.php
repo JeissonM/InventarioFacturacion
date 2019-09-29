@@ -258,16 +258,16 @@ function menu($location) {
             echo '<li class="treeview active">
                           <a href="#"><i class="fa fa-database"></i> <span>Gestionar Datos</span> <i class="fa fa-angle-left pull-right"></i></a>
                           <ul class="treeview-menu">
-                            <li><a href="categorias.php"><i class="fa fa-folder-open-o"></i>Categoria de Servicios</a></li>
-                            <li><a href="servicios.php"><i class="fa fa-wrench"></i>Servicios</a></li>
+                            <li><a href="categorias.php"><i class="fa fa-folder-open-o"></i>Categoria de Productos</a></li>
+                            <li><a href="servicios.php"><i class="fa fa-wrench"></i>Productos</a></li>
                           </ul>
                         </li>';
         } else {
             echo '<li class="treeview">
                           <a href="#"><i class="fa fa-database"></i> <span>Gestionar Datos</span> <i class="fa fa-angle-left pull-right"></i></a>
                           <ul class="treeview-menu">
-                            <li><a href="categorias.php"><i class="fa fa-folder-open-o"></i>Categoria de Servicios</a></li>
-                            <li><a href="servicios.php"><i class="fa fa-wrench"></i>Servicios</a></li>
+                            <li><a href="categorias.php"><i class="fa fa-folder-open-o"></i>Categoria de Productos</a></li>
+                            <li><a href="servicios.php"><i class="fa fa-wrench"></i>Productos</a></li>
                           </ul>
                         </li>';
         }

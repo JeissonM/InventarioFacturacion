@@ -16,17 +16,15 @@ menu("gestion");
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Gestion de Categorias de Servicios
+            Gestion de Categorias de Productos
             <small>Ferretería FerroCoyot | Admin</small>
         </h1>
         <ol class="breadcrumb">
             <li><a href="index.php"><i class="fa fa-home"></i> Inicio</a></li>
             <li><a href="#"><i class="fa fa-database"></i> Gestionar Datos</a></li>
-            <li class="active"><a href="categorias.php"><i class="fa fa-folder-open-o"></i> Categorias de Servicios</a></li>
+            <li class="active"><a href="categorias.php"><i class="fa fa-folder-open-o"></i> Categorias de Productos</a></li>
         </ol>
     </section>
-
-
     <!-- Main content -->
     <section class="content">
         <div class="box box-primary color-palette-box">
@@ -34,30 +32,26 @@ menu("gestion");
                 <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Crear Categoria</button>
             </div>
         </div>
-
-        <div class="box box-primary color-palette-box">
-            <div class="box-header with-border">
-                <h3 class="box-title"><i class="fa fa-search"></i> Consulta de Categoria</h3>
-                <form class="form-horizontal" id="con" name="con">
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Consultar por Nombre</label>
-
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputName" name="inputName" onkeyup="consultar()" placeholder="Nombre de Categoria...">
+        <!--        <div class="box box-primary color-palette-box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-search"></i> Consulta de Categoria</h3>
+                        <form class="form-horizontal" id="con" name="con">
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Consultar por Nombre</label>
+        
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName" name="inputName" onkeyup="consultar()" placeholder="Nombre de Categoria...">
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-sm-12 col-md-12" id="result" name="result">
+        
+                            </div>
+        
                         </div>
                     </div>
-                </form>
-                <div class="row">
-                    <div class="col-sm-12 col-md-12" id="result" name="result">
-
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-
-
+                </div>-->
         <div class="box box-primary color-palette-box">
             <div class="box-header with-border">
                 <h3 class="box-title"><i class="fa fa-folder-open-o"></i> Listado de Categorias &nbsp;&nbsp;| &nbsp;&nbsp;</h3> 
@@ -69,20 +63,15 @@ menu("gestion");
 
 
                     </div>
-
                 </div>
                 <!-- /.row -->
             </div>
             <!-- /.box-body -->
         </div>
-
-
     </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-
 
 <?php
 pie();
@@ -91,9 +80,6 @@ pie();
 <?php
 fin();
 ?>
-
-
-
 
 <!-- Modal -->
 <div class="modal fade modal-success" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -126,19 +112,18 @@ fin();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="
-                if (document.categoria.nombre.value.length == 0 || document.categoria.descripcion.value.length == 0) {
-                    borrar();
-                    mensage('Rellene todos los campos del formulario!', 'danger', 'msj1');
-                } else {
-                    borrar();
-                    guardar();
-                }
+                        if (document.categoria.nombre.value.length == 0 || document.categoria.descripcion.value.length == 0) {
+                            borrar();
+                            mensage('Rellene todos los campos del formulario!', 'danger', 'msj1');
+                        } else {
+                            borrar();
+                            guardar();
+                        }
                         ">Guardar Categoria</button>
             </div>
         </div>
     </div>
 </div>
-
 
 <!-- Modal Edicion-->
 <div class="modal fade modal-success" id="myModalE" name="myModalE" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -172,13 +157,13 @@ fin();
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="
-                if (document.cat.nom.value.length == 0 || document.cat.des.value.length == 0) {
-                    borrar();
-                    mensage('Rellene todos los campos del formulario!', 'danger', 'msj2');
-                } else {
-                    borrar();
-                    modificar();
-                }
+                        if (document.cat.nom.value.length == 0 || document.cat.des.value.length == 0) {
+                            borrar();
+                            mensage('Rellene todos los campos del formulario!', 'danger', 'msj2');
+                        } else {
+                            borrar();
+                            modificar();
+                        }
                         ">Guardar Categoria</button>
             </div>
         </div>

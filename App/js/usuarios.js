@@ -66,6 +66,7 @@ function listar() {
         data:{"si":"si"},
     }).done(function( msg ) {
         $('#tabla').html(msg);
+        $('#table1').DataTable();
     });
 }
 

@@ -15,11 +15,14 @@ if ($con->affected_rows > 0) {
 				</thead>
 			<tbody>";
     while ($row = $result->fetch_assoc()) {
-        $msg = $msg . "<tr>
-							<td>" . $row["id"] . "</td>
+        $msg = $msg . "<tr><td>" . $row["id"] . "</td>
 							<td>" . $row["nombre"] . "</td>
 							<td>" . $row["descripcion"] . "</td>
-							<td><center><button class='btn btn-success btn-md btn-xs' id='" . $row["id"] . ';' . $row["nombre"] . ';' . $row["descripcion"] . "' onClick='javascript:ponerDatos(this.id)' data-toggle='modal' data-target='#myModalE'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger btn-md btn-xs' id='" . $row["id"] . "' onClick='javascript:eliminar(this.id)'><i class='fa fa-remove'></i></button></center></td>
+							<td><center>
+                                                        <button class='btn btn-success btn-md btn-xs' id='" . $row["id"] . ';' . $row["nombre"] . ';' . $row["descripcion"] . "' onClick='javascript:ponerDatos(this.id)' data-toggle='modal' data-target='#myModalE'><i class='fa fa-edit'></i></button>
+                                                        <button class='btn btn-danger btn-md btn-xs' id='" . $row["id"] . "' onClick='javascript:eliminar(this.id)'><i class='fa fa-remove'></i></button>
+                                                        <a class='btn btn-primary btn-md btn-xs' href='categoriasservicios.php?id=" . $row["id"] . "'><i class='fa fa-eye'></i></a>
+                                                        </center></td>
 						</tr>";
     }
     $msg = $msg . "</tbody></table>";

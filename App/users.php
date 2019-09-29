@@ -20,7 +20,7 @@ include("cabecera.php");
    <section class="content-header">
       <h1>
         Gestion de Los Usuarios del Sistema
-        <small>A&S Sas | Admin</small>
+        <small>Ferretería FerroCoyot | Admin</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-home"></i> Inicio</a></li>
@@ -35,31 +35,7 @@ include("cabecera.php");
         <div class="box-header with-border">
           <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Crear Usuario</button>
         </div>
-      </div>
-
-      <div class="box box-primary color-palette-box">
-        <div class="box-header with-border">
-          <h3 class="box-title"><i class="fa fa-search"></i> Consulta de Usuarios</h3>
-          <form class="form-horizontal">
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Consultar por Numero de Identificacion</label>
-
-                    <div class="col-sm-10">
-                      <input type="number" class="form-control" id="inputName" onkeyup="consultar()" placeholder="Numero de Identificacion...">
-                    </div>
-                  </div>
-          </form>
-          <div class="row">
-            <div class="col-sm-12 col-md-12" id="result" name="result">
-                
-            </div>
-           
-          </div>
-        </div>
-      </div>
-
-
-      
+      </div>      
         <div class="box box-primary color-palette-box">
         <div class="box-header with-border">
           <h3 class="box-title"><i class="fa fa-folder-open-o"></i> Listado de Usuarios &nbsp;&nbsp;| &nbsp;&nbsp;</h3> 

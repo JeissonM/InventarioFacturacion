@@ -20,7 +20,7 @@ include("cabecera.php");
    <section class="content-header">
       <h1>
         Gestion de Proveedores
-        <small>A&S Sas | Admin</small>
+        <small>Ferretería FerroCoyot | Admin</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="index.php"><i class="fa fa-home"></i> Inicio</a></li>
@@ -36,30 +36,7 @@ include("cabecera.php");
           <button type="submit" class="btn btn-success" data-toggle="modal" data-target="#myModal"><i class="fa fa-plus"></i> Crear Proveedor</button>
         </div>
       </div>
-
-      <div class="box box-primary color-palette-box">
-        <div class="box-header with-border">
-          <h3 class="box-title"><i class="fa fa-search"></i> Consulta de Proveedores</h3>
-          <form class="form-horizontal" id="con" name="con">
-                  <div class="form-group">
-                    <label for="inputName" class="col-sm-2 control-label">Consultar por Nombre</label>
-
-                    <div class="col-sm-10">
-                      <input type="text" class="form-control" id="inputName" name="inputName" onkeyup="consultar()" placeholder="Nombre del Proveedor...">
-                    </div>
-                  </div>
-          </form>
-          <div class="row">
-            <div class="col-sm-12 col-md-12" id="result" name="result">
-                
-            </div>
-           
-          </div>
-        </div>
-      </div>
-
-
-      
+     
         <div class="box box-primary color-palette-box">
         <div class="box-header with-border">
           <h3 class="box-title"><i class="fa fa-users"></i> Listado de Proveedores &nbsp;&nbsp;| &nbsp;&nbsp;</h3> 
