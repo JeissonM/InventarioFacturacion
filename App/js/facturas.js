@@ -214,12 +214,13 @@ function add(str) {
     verificar.push({producto: v[0], cantidad: v[5]});
     var destino = document.getElementById("tbDetalle");
     var tr = document.createElement("tr");
-    tr.appendChild(crearCampo("det_nombres[]", nom, false, id, false));
-    tr.appendChild(crearCampo("det_cant[]", "", false, 'calcular(this.id)', id, true));
-    tr.appendChild(crearCampo("det_valou[]", precio, false, 'calcular(-1)', id, false));
-    tr.appendChild(crearCampo("det_imp[]", imp, false, 'calcular(-1)', id, false));
-    tr.appendChild(crearCampo("det_valimp[]", "", true, id, false));
-    tr.appendChild(crearCampo("det_valt[]", "", true, id, false));
+    tr.appendChild(crearCampo("text", "det_id[]", id, true, false, id, false));
+    tr.appendChild(crearCampo("text", "det_nombres[]", nom, false, false, "nombre_" + id, true));
+    tr.appendChild(crearCampo("text", "det_cant[]", "", false, 'calcular(this.id)', id, true));
+    tr.appendChild(crearCampo("text", "det_valou[]", precio, false, 'calcular(-1)', "valor_" + id, true));
+    tr.appendChild(crearCampo("text", "det_imp[]", imp, false, 'calcular(-1)', id, false));
+    tr.appendChild(crearCampo("text", "det_valimp[]", "", true, false, id, false));
+    tr.appendChild(crearCampo("text", "det_valt[]", "", true, false, id, false));
     var td = document.createElement("td");
     var btn = document.createElement("button");
     btn.type = "button";
@@ -228,32 +229,33 @@ function add(str) {
     btn.setAttribute("onclick", "eliminarFila(this)");
     td.appendChild(btn);
     tr.appendChild(td);
-//    if (des > 0) {
-//        var td2 = document.createElement("td");
-//        var btn2 = document.createElement("button");
-//        btn2.type = "button";
-//        var txt = "";
-//        if (esp == '1') {
-//            txt = "(" + des + "%)";
-//        } else {
-//            txt = "($" + des + ")";
-//        }
-//        btn2.innerHTML = "DESCUENTO " + txt;
-//        btn2.setAttribute("class", "btn btn-primary btn-md btn-xs");
-//        btn2.setAttribute("id", esp + ";" + des);
-//        btn2.setAttribute("onclick", "aplicarDescuento(this.id)");
-//        td2.appendChild(btn2);
-//        tr.appendChild(td2);
-//    }
+    if (des > 0) {
+        var td2 = document.createElement("td");
+        var btn2 = document.createElement("button");
+        td2.setAttribute("id", "td_" + id);
+        btn2.type = "button";
+        var txt = "";
+        if (esp == '1') {
+            txt = "(" + des + "%)";
+        } else {
+            txt = "($" + des + ")";
+        }
+        btn2.innerHTML = "DESCUENTO " + txt;
+        btn2.setAttribute("class", "btn btn-primary btn-md btn-xs");
+        btn2.setAttribute("id", esp + ";" + des + ";" + id);
+        btn2.setAttribute("onclick", "aplicarDescuento(this.id)");
+        td2.appendChild(btn2);
+        tr.appendChild(td2);
+    }
     destino.appendChild(tr);
     var pago = document.getElementById("pago");
     pago.value = 0;
 }
 
-function crearCampo(nombre, valor, readonly, evento, id, ponerId) {
+function crearCampo(type, nombre, valor, readonly, evento, id, ponerId) {
     var td = document.createElement("td");
     var txt = document.createElement("input");
-    txt.type = "text";
+    txt.type = type;
     txt.setAttribute("name", nombre);
     txt.setAttribute("value", valor);
     txt.setAttribute("onkeyup", evento);
@@ -441,4 +443,30 @@ function verFacn(id) {
     a.target = "_blank";
     a.href = url;
     a.click();
+}
+
+function aplicarDescuento(str) {
+    var v = str.split(";");
+    var idP = v[2];
+    var porPorcentaje = v[0];
+    var descuento = v[1];
+    var valorUnitario = $("#valor_" + idP).val();
+    var cant = $("#" + idP).val();
+    if (cant != '' && cant != '0') {
+        if (porPorcentaje == '1') {
+            //por porcentaje
+            var nuevoValorUnitario = parseFloat(valorUnitario) - (parseFloat(valorUnitario) * (parseFloat(descuento) / 100));
+            $("#valor_" + idP).val(nuevoValorUnitario);
+            calcular(-1);
+            $("#td_" + idP).html("");
+        } else {
+            //por moneda
+            var nuevoValorUnitario = parseFloat(valorUnitario) - parseFloat(descuento);
+            $("#valor_" + idP).val(nuevoValorUnitario);
+            calcular(-1);
+            $("#td_" + idP).html("");
+        }
+    } else {
+        alert("Debe indicar la cantidad de producto a facturar para aplicar el descuento");
+    }
 }

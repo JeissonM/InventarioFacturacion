@@ -117,6 +117,7 @@ menu("facturacion");
                             <table id='tablen' class='table table-bordered table-hover' cellspacing='0' width='100%'>
                                 <thead>
                                     <tr>
+                                        <th>ID</th>
                                         <th>Nombre y Descripcion</th>
                                         <th>Cantidad</th>
                                         <th>Valor Unitario</th>
@@ -124,6 +125,7 @@ menu("facturacion");
                                         <th>Valor Impuesto</th>
                                         <th>Valor Total</th>
                                         <th>Retirar</th>
+                                        <th>Descuento</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbDetalle">
@@ -199,7 +201,6 @@ if (isset($_POST["btnf"])) {
     $factura->ciudad = strtoupper($_POST["ciudad"]);
     $factura->telefono = $_POST["telefono"];
 
-
     if (isset($_POST["det_nombres"])) {
         $n = $_POST["det_nombres"];
         $c = $_POST["det_cant"];
@@ -207,9 +208,9 @@ if (isset($_POST["btnf"])) {
         $vi = $_POST["det_imp"];
         $vti = $_POST["det_valimp"];
         $vt = $_POST["det_valt"];
+        $ids = $_POST['det_id'];
         foreach ($n as $p => $o) {
-            $factura->agregarDetalle(
-                    $factura->nofactura, $n[$p], $c[$p], $vu[$p], $vi[$p], $vti[$p], $vt[$p]);
+            $factura->agregarDetalle($factura->nofactura, $n[$p], $c[$p], $vu[$p], $vi[$p], $vti[$p], $vt[$p], $ids[$p]);
         }
     }
     $factura->subtotal = $_POST["st"];
@@ -257,7 +258,7 @@ class factura {
     private $saldo = "";
     private $estado = "PENDIENTE";
 
-    public function agregarDetalle($idfactura, $nombre_des, $cant, $valoru, $valimp, $valtimp, $valtotal) {
+    public function agregarDetalle($idfactura, $nombre_des, $cant, $valoru, $valimp, $valtimp, $valtotal, $idp) {
         $this->detalleFactura[] = array(
             "idfactura" => $idfactura,
             "nombre_des" => $nombre_des,
@@ -265,7 +266,8 @@ class factura {
             "valoru" => $valoru,
             "valimp" => $valimp,
             "valtimp" => $valtimp,
-            "valtotal" => $valtotal
+            "valtotal" => $valtotal,
+            "idproducto" => $idp
         );
     }
 
@@ -314,6 +316,16 @@ class factura {
                 $cont += 1;
                 if ($j > 0) {
                     $cont2 += 1;
+                    $q = "SELECT existencia FROM as_servicios WHERE id='" . $detalle['idproducto'] . "';";
+                    $res = $con->query($q);
+                    $exis = 0;
+                    if ($con->affected_rows > 0) {
+                        while ($row = $res->fetch_assoc()) {
+                            $exis = $row['existencia'];
+                        }
+                    }
+                    $nuevaExist = $exis - $detalle['cant'];
+                    $con->query("UPDATE as_servicios SET existencia='" . $nuevaExist . "' WHERE id='" . $detalle['idproducto'] . "';");
                 }
             }
             if ($x > 0 and $j > 0) {
@@ -371,7 +383,7 @@ class factura {
                                                     echo "AGOTADO";
                                                 } else {
                                                     ?>
-                                                    <a class='btn btn-success btn-md btn-xs' id="<?php echo $row["id"] . ";" . $row["nombre"] . ";" . $row["descripcion"] . ";" . $row["precio_venta"] . ";" . $row["impuesto"] . ";" . $row["existencia"]. ";" . $row["esporcentaje"]. ";" . $row["descuento"] ?>" onclick="add(this.id)"><i class='fa fa-check'></i></a>
+                                                    <a class='btn btn-success btn-md btn-xs' id="<?php echo $row["id"] . ";" . $row["nombre"] . ";" . $row["descripcion"] . ";" . $row["precio_venta"] . ";" . $row["impuesto"] . ";" . $row["existencia"] . ";" . $row["esporcentaje"] . ";" . $row["descuento"] ?>" onclick="add(this.id)"><i class='fa fa-check'></i></a>
                                                         <?php
                                                     }
                                                     ?>

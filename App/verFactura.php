@@ -40,7 +40,7 @@ if ($con->affected_rows > 0) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Visor de Facturas
+            Visor de Facturas 
             <small>Ferretería FerroCoyot | Admin</small>
         </h1>
         <ol class="breadcrumb">
@@ -55,7 +55,7 @@ if ($con->affected_rows > 0) {
         <div class="box box-primary color-palette-box">
             <div class="box-header with-border">
                 <h3 class="box-title"><i class="fa fa-cart-plus"></i> Factura de Compra o Venta</h3></br></br>
-                <form class="form-horizontal" action="defacturar.php" method="POST" id="con" name="con">
+                <form class="form-horizontal" id="con" name="con">
                     <div class="form-group">
                         <label for="inputName" class="col-sm-2 control-label">Numero de la Factura</label>
                         <div class="col-sm-10">
@@ -102,12 +102,14 @@ if ($con->affected_rows > 0) {
                         <div class="col-sm-12 col-md-12" id="tablaser" name="tablaser">
                             <table id='tablen' class='table table-bordered table-hover' cellspacing='0' width='100%'>
                                 <thead>
-                                <th>Activo/Pasivo</th>
-                                <th>Cantidad</th>
-                                <th>Valor Unitario</th>
-                                <th>% Impuesto</th>
-                                <th>Total Impuesto</th>
-                                <th>Valor Total</th>
+                                    <tr>
+                                        <th>Activo/Pasivo</th>
+                                        <th>Cantidad</th>
+                                        <th>Valor Unitario</th>
+                                        <th>% Impuesto</th>
+                                        <th>Total Impuesto</th>
+                                        <th>Valor Total</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
                                     <?php

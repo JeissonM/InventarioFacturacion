@@ -37,6 +37,7 @@ menu("reportes");
                 <a href="idn.php"><li class="list-group-item" id="report"><span class="badge"><i class="fa fa-file-pdf-o"></i></span>IVA Descontable por NIT</li></a>
                 <a href="reporteInventario.php?id=0&modo=TODOS" target="_blank"><li class="list-group-item" id="report"><span class="badge"><i class="fa fa-file-pdf-o"></i></span>Reporte de Inventario (Existencia)</li></a>
                 <a href="reporteInventarioCategoria.php"><li class="list-group-item" id="report"><span class="badge"><i class="fa fa-file-pdf-o"></i></span>Reporte de Inventario Por Categoría (Existencia)</li></a>
+                <a href="reporteVentas.php"><li class="list-group-item" id="report"><span class="badge"><i class="fa fa-file-pdf-o"></i></span>Reporte de Ventas Por Fechas</li></a>
             </ul>
 
             <!-- /.box-body -->
