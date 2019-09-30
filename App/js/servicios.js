@@ -30,13 +30,15 @@ function guardar() {
     var pv = $('#preciov').val();
     var unidad = $('#unidad').val();
     var existencia = $('#existencia').val();
+    var esdescuento = $('#esdescuento').val();
+    var descuento = $('#descuento').val();
     nom = nom.toUpperCase();
     des = des.toUpperCase();
     unidad = unidad.toUpperCase();
     $.ajax({
         type: 'POST',
         url: urlg + '/Modules/Servicios/nueva.php',
-        data: {"nombre": nom, "descripcion": des, "precio": precio, "impuesto": imp, "categoria": cat, "unidad": unidad, "preciov": pv, "existencia": existencia},
+        data: {"nombre": nom, "descripcion": des, "precio": precio, "impuesto": imp, "categoria": cat, "unidad": unidad, "preciov": pv, "existencia": existencia, "esdescuento": esdescuento, "descuento": descuento},
     }).done(function (msg) {
         var m = "msj1";
         mensage(msg, "info", m);
@@ -47,6 +49,7 @@ function guardar() {
         $('#preciov').val("");
         $('#unidad').val("");
         $('#existencia').val("");
+        $('#descuento').val("");
         listar();
     });
 }
@@ -113,6 +116,8 @@ function ponerDatos(str) {
     var pv = str.split(";")[6];
     var ex = str.split(";")[7];
     var und = str.split(";")[8];
+    var esdescuento = str.split(";")[9];
+    var descuento = str.split(";")[10];
     document.servicio2.id.value = ids;
     document.servicio2.nombre2.value = nom;
     document.servicio2.descripcion2.value = des;
@@ -121,10 +126,19 @@ function ponerDatos(str) {
     document.servicio2.preciov2.value = pv;
     document.servicio2.unidad2.value = und;
     document.servicio2.existencia2.value = ex;
-    //var t="#size > option:contains('"+ cat +"')";
-    //alert(t);
+    document.servicio2.descuento2.value = descuento;
+    buscarSelect('esdescuento2',esdescuento);
     $('#size2 option:contains("' + cat + '")').prop('selected', true);
-    //$(t).attr('selected', 'selected');
+    //$('#esdescuento2 option:contains("' + esdescuento + '")').prop('selected', true);
+}
+
+function buscarSelect(select, valor) {
+    var select = document.getElementById(select);
+    for (var i = 0; i < select.length; i++) {
+        if (parseInt(select.options[i].value) == parseInt(valor)) {
+            select.selectedIndex = i;
+        }
+    }
 }
 
 function modificar() {
@@ -137,13 +151,15 @@ function modificar() {
     var pv = $('#preciov2').val();
     var und = $('#unidad2').val();
     var ex = $('#existencia2').val();
+    var esdescuento = $('#esdescuento2').val();
+    var descuento = $('#descuento2').val();
     nom = nom.toUpperCase();
     des = des.toUpperCase();
     und = und.toUpperCase();
     $.ajax({
         type: 'POST',
         url: urlg + '/Modules/Servicios/modificar.php',
-        data: {"id": ids, "nombre": nom, "descripcion": des, "precio": precio, "impuesto": por, "categoria": cat, "unidad": und, "preciov": pv, "existencia": ex},
+        data: {"id": ids, "nombre": nom, "descripcion": des, "precio": precio, "impuesto": por, "categoria": cat, "unidad": und, "preciov": pv, "existencia": ex, "esdescuento": esdescuento, "descuento": descuento},
     }).done(function (msg) {
         var m = "msj2";
         mensage(msg, "info", m);
@@ -151,6 +167,7 @@ function modificar() {
         $('#precio2').val("");
         $('#impuesto2').val("");
         $('#descripcion2').val("");
+        $('#descuento2').val("");
         listar();
     });
 }

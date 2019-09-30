@@ -139,11 +139,10 @@ genera($nro);
 	$pdf->Cell(36,8,'IVA $','LTR',0,'R');
 	$pdf->Cell(30,8,number_format($impuesto,2,'.',''),'TR',0,'R');
 	$pdf->Ln();
-	$pdf->SetFont('arial','',5);
-	$pdf->Cell(124,8,'La presente factura se asimila en todos sus efectos legales a una letra de cambio, segun Art. 774 del C.C. El no pago oportuno causara interes de mora.','LTBR',0,'L');
 	$pdf->SetFont('arial','B',10);
-	$pdf->Cell(36,8,'TOTAL $','TRB',0,'R');
-	$pdf->Cell(30,8,number_format($total,2,'.',''),'TRB',0,'R');
+	$pdf->Cell(160,8,'**************************************************  TOTAL  **************************************************','LTBR',0,'L');
+	$pdf->SetFont('arial','B',10);
+	$pdf->Cell(30,8,"$ ".number_format($total,2,'.',''),'TRB',0,'R');
 	$pdf->Ln(10);
 	$pdf->Cell(0,8,' RECIBI. FIRMA Y SELLO                                                                     FIRMA AUTORIZADA Y SELLO','RTL',0,'L');
 	$pdf->Ln();
@@ -151,12 +150,7 @@ genera($nro);
 	$pdf->Ln();
 	$pdf->Cell(0,8,' C.C  O NIT','LRB',0,'L');
 	$pdf->Ln(11);
-	$pdf->SetFont('arial','',7);
-	$pdf->Cell(0,0,'PUBLICIDAD ZONA CREATIVA Y/O FABIO TORRES MOLINA NIT: 77.090.972-9 TELEFONO 5708490 VALLEDUPAR',0,0,'C');
-	$pdf->Ln(3);
-	$pdf->SetFont('arial','',6);
-	$pdf->Cell(0,0,'.... ORIGINAL Y/O COPIA ....',0,0,'C');
-	$pdf->Output('factura.pdf','D');
+	$pdf->Output('factura.pdf','I');
  }
 function numtoletras($xcifra)
 {

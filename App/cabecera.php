@@ -63,6 +63,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
 <script src="js/app.min.js"></script>
 <script type="text/javascript">
 var urlg = "http://localhost/Inventario/App";
+function datatablep() {
+    $("#tablef").DataTable();
+}
 </script>
 
 </head>
@@ -110,27 +113,27 @@ function menuTop() {
                                 <!-- inner menu: contains the messages -->
                                 <ul class="menu">
 
-    <?php
-    $con = conectar();
-    $query = "SELECT m.id, m.de, (SELECT u.nombres FROM as_usuarios u WHERE u.identificacion=m.de) as den, m.para, (SELECT u.nombres FROM as_usuarios u WHERE u.identificacion=m.para) as paran, m.asunto, m.mensaje, m.fecha, m.estado, m.borrador FROM as_mensajes m ORDER BY fecha desc;";
-    $result = $con->query($query);
-    if ($con->affected_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            if ($row["borrador"] === "NO") {
-                if ($row["para"] == $_SESSION["id"]) {
-                    if ($row["estado"] === "NO") {
-                        echo "<li><a href='mensajes.php'>
+                                    <?php
+                                    $con = conectar();
+                                    $query = "SELECT m.id, m.de, (SELECT u.nombres FROM as_usuarios u WHERE u.identificacion=m.de) as den, m.para, (SELECT u.nombres FROM as_usuarios u WHERE u.identificacion=m.para) as paran, m.asunto, m.mensaje, m.fecha, m.estado, m.borrador FROM as_mensajes m ORDER BY fecha desc;";
+                                    $result = $con->query($query);
+                                    if ($con->affected_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            if ($row["borrador"] === "NO") {
+                                                if ($row["para"] == $_SESSION["id"]) {
+                                                    if ($row["estado"] === "NO") {
+                                                        echo "<li><a href='mensajes.php'>
                                               <h4>
                                                 " . $row["asunto"] . "
                                                 <small><i class='fa fa-clock-o'></i> " . $row["fecha"] . "</small>
                                               </h4>
                                           </a></li>";
-                    }
-                }
-            }
-        }
-    }
-    ?>
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    ?>
                                 </ul>
                                 <!-- /.menu -->
                             </li>
@@ -150,18 +153,18 @@ function menuTop() {
                             <li>
                                 <!-- Inner Menu: contains the notifications -->
                                 <ul class="menu">
-    <?php
-    $con = conectar();
-    $query = "SELECT * FROM as_factura WHERE estado='PENDIENTE' ORDER BY fecha ASC;";
-    $result = $con->query($query);
-    if ($con->affected_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "<li><a href='facturacion.php'>
+                                    <?php
+                                    $con = conectar();
+                                    $query = "SELECT * FROM as_factura WHERE estado='PENDIENTE' ORDER BY fecha ASC;";
+                                    $result = $con->query($query);
+                                    if ($con->affected_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            echo "<li><a href='facturacion.php'>
                               <i class='fa fa-users text-aqua'></i>" . $row["nofactura"] . " ->" . $row["cliente"] . "
                               </a></li>";
-        }
-    }
-    ?>
+                                        }
+                                    }
+                                    ?>
                                 </ul>
                             </li>
                             <li class="footer"><a href="facturacion.php">Ver Todas las Facturas</a></li>
@@ -172,17 +175,17 @@ function menuTop() {
                         <!-- Menu Toggle Button -->
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             <!-- The user image in the navbar-->
-    <?php echo "<img src='" . $_SESSION['path'] . "' class='user-image' alt='User Image'>"; ?>
+                            <?php echo "<img src='" . $_SESSION['path'] . "' class='user-image' alt='User Image'>"; ?>
                             <!-- hidden-xs hides the username on small devices so only the image appears. -->
                             <span class="hidden-xs"><?php echo $_SESSION['nombres'] . " " . $_SESSION['apellidos'] ?></span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- The user image in the menu -->
                             <li class="user-header">
-    <?php echo "<img src='" . $_SESSION['path'] . "' class='img-circle' alt='User Image'>"; ?>
+                                <?php echo "<img src='" . $_SESSION['path'] . "' class='img-circle' alt='User Image'>"; ?>
 
                                 <p>
-    <?php echo $_SESSION['nombres'] . " " . $_SESSION['apellidos'] ?>
+                                    <?php echo $_SESSION['nombres'] . " " . $_SESSION['apellidos'] ?>
                                     <small><?php echo $_SESSION['rol'] ?> del Sitio</small>
                                 </p>
                             </li>

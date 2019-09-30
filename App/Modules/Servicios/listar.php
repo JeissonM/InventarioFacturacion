@@ -2,7 +2,7 @@
 
 include("../../config.php");
 $con = conectar();
-$query = "SELECT s.id, s.nombre, s.descripcion, s.precio, s.impuesto, s.idcategoria, (SELECT c.nombre FROM as_categoria c WHERE c.id=s.idcategoria) as categoria, s.precio_venta, s. existencia, s.unidad_medida FROM as_servicios s;";
+$query = "SELECT s.id, s.nombre, s.descripcion, s.precio, s.impuesto, s.idcategoria, (SELECT c.nombre FROM as_categoria c WHERE c.id=s.idcategoria) as categoria, s.precio_venta, s. existencia, s.unidad_medida, s.esporcentaje, s.descuento FROM as_servicios s;";
 $result = $con->query($query);
 $msg = "";
 if ($con->affected_rows > 0) {
@@ -16,6 +16,7 @@ if ($con->affected_rows > 0) {
                                         <th>Impuesto %</th>
                                         <th>Existencia</th>
 					<th>Categoria</th>
+                                        <th>Descuento</th>
 					<th><center>Acciones</center></th>
 				</thead>
 			<tbody>";
@@ -28,9 +29,18 @@ if ($con->affected_rows > 0) {
                                                         <td>$ " . $row["precio_venta"] . "</td>
 							<td>" . $row["impuesto"] . "%</td>
                                                         <td>" . $row["existencia"] . "  (" . $row["unidad_medida"] . ")</td>
-							<td>" . $row["categoria"] . "</td>
-							<td><center><button class='btn btn-success btn-md btn-xs' id='" . $row["id"] . ';' . $row["nombre"] . ';' . $row["descripcion"] . ';' . $row["precio"] . ';' . $row["impuesto"] . ';' . $row["categoria"] . ";" . $row["precio_venta"] . ";" . $row["existencia"] . ";" . $row["unidad_medida"] . "' onClick='javascript:ponerDatos(this.id)' data-toggle='modal' data-target='#myModalE'><i class='fa fa-edit'></i></button>&nbsp;&nbsp;&nbsp;<button class='btn btn-danger btn-md btn-xs' id='" . $row["id"] . "' onClick='javascript:eliminar(this.id)'><i class='fa fa-remove'></i></button></center></td>
-						</tr>";
+							<td>" . $row["categoria"] . "</td>";
+        if ($row["descuento"] > 0) {
+            if ($row["esporcentaje"] == '1') {
+                $msg = $msg . "<td>" . $row["descuento"] . "%</td>";
+            } else {
+                $msg = $msg . "<td>$" . $row["descuento"] . "</td>";
+            }
+        } else {
+            $msg = $msg . "<td> --- </td>";
+        }
+        $msg = $msg . "<td><center><button class = 'btn btn-success btn-md btn-xs' id = '" . $row["id"] . ';' . $row["nombre"] . ';' . $row["descripcion"] . ';' . $row["precio"] . ';' . $row["impuesto"] . ';' . $row["categoria"] . ";" . $row["precio_venta"] . ";" . $row["existencia"] . ";" . $row["unidad_medida"] . ";" . $row['esporcentaje'] . ";" . $row['descuento'] . "' onClick = 'javascript:ponerDatos(this.id)' data-toggle = 'modal' data-target = '#myModalE'><i class = 'fa fa-edit'></i></button>&nbsp;
+&nbsp;&nbsp;<button class = 'btn btn-danger btn-md btn-xs' id = '" . $row["id"] . "' onClick = 'javascript:eliminar(this.id)'><i class = 'fa fa-remove'></i></button></center></td></tr>";
     }
     $msg = $msg . "</tbody></table>";
 } else {

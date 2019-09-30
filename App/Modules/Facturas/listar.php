@@ -31,11 +31,11 @@
 								<td>".$row["nit"]."</td>
 								<td>".$row["direccion"]."</td>
 								<td>".$row["telefono"]."</td>
-								<td>".$row["subtotal"]."</td>
-								<td>".$row["impuesto"]."</td>
-								<td>".$row["total"]."</td>
+								<td>$".$row["subtotal"]."</td>
+								<td>$".$row["impuesto"]."</td>
+								<td>$".$row["total"]."</td>
 								<td>".$row["estado"]."</td>
-								<td>".$row["saldo"]."</td>
+								<td>$".$row["saldo"]."</td>
 								<td><center><button class='btn btn-danger btn-md btn-xs' id='".$row["nofactura"]."' onClick='javascript:eliminar(this.id)'><i class='fa fa-remove'></i></button>
 								<button class='btn btn-primary btn-md btn-xs' id='".$row["nofactura"]."&tipo=normal' onClick='javascript:ver(this.id)'><i class='fa fa-eye'></i></button>
 								<button class='btn btn-success btn-md btn-xs' id='".$row["nofactura"].";".$row["saldo"]."' onClick='javascript:ponerPago(this.id)' data-toggle='modal' data-target='#myModalE'><i class='fa fa-money'></i></button>
@@ -49,11 +49,11 @@
 								<td>".$row["nit"]."</td>
 								<td>".$row["direccion"]."</td>
 								<td>".$row["telefono"]."</td>
-								<td>".$row["subtotal"]."</td>
-								<td>".$row["impuesto"]."</td>
-								<td>".$row["total"]."</td>
+								<td>$".$row["subtotal"]."</td>
+								<td>$".$row["impuesto"]."</td>
+								<td>$".$row["total"]."</td>
 								<td>".$row["estado"]."</td>
-								<td>".$row["saldo"]."</td>
+								<td>$".$row["saldo"]."</td>
 								<td><center><button class='btn btn-danger btn-md btn-xs' id='".$row["nofactura"]."' onClick='javascript:eliminar(this.id)'><i class='fa fa-remove'></i></button>
 								<button class='btn btn-primary btn-md btn-xs' id='".$row["nofactura"]."&tipo=normal' onClick='javascript:ver(this.id)'><i class='fa fa-eye'></i></button>
 								<button class='btn btn-warning btn-md btn-xs' id='".$row["nofactura"]."' onClick='javascript:verFacn(this.id)'><i class='fa fa-print'></i></button></center></td>

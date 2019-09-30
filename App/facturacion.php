@@ -17,7 +17,7 @@ include("cabecera.php");
     <!-- Content Header (Page header) -->
    <section class="content-header">
       <h1>
-        Facturacion de Servicios
+        Facturacion de Productos
         <small>Ferretería FerroCoyot | Admin</small>
       </h1>
       <ol class="breadcrumb">

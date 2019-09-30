@@ -94,7 +94,7 @@ fin();
 
 <!-- Modal -->
 <div class="modal fade modal-success" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -103,64 +103,67 @@ fin();
             <div class="modal-body">
                 <form class="form-horizontal" id="servicio" name="servicio">
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Nombre</label>
-
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" onfocus="borrar()" placeholder="Nombre Aqui...">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Descripcion</label>
-
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Descripcion</label>
                             <input type="text" class="form-control" id="descripcion" name="descripcion" onfocus="borrar()" placeholder="Descripcion Aqui...">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Precio Compra</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Precio Compra</label>
                             <input type="number" class="form-control" id="precio" name="precio" onfocus="borrar()" placeholder="Precio de compra del producto...">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Precio Venta</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Precio Venta</label>
                             <input type="number" class="form-control" id="preciov" name="preciov" onfocus="borrar()" placeholder="Precio de venta al público...">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Existencia Producto</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Existencia Producto</label>
                             <input type="number" class="form-control" id="existencia" name="existencia" onfocus="borrar()" placeholder="Existencia del producto en inventario...">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Unidad de Medida</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Unidad de Medida</label>
                             <input type="text" maxlength="250" class="form-control" id="unidad" name="unidad" onfocus="borrar()" placeholder="Unidad de medida del producto (KG, LIBRA, X UNIDAD, BOLSA, PACA, CUÑETE, GALON, ETC)...">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-3 control-label">Impuesto IVA/otro</label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Impuesto IVA/otro</label>
                             <input type="number" class="form-control" id="impuesto" name="impuesto" onfocus="borrar()" placeholder="Escriba asi: para 16% --> 16, para 5.5% --> 5.5">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label">Categoria de Producto</label>
+                            <select class="form-control" name="size" id="size">
+                                <?php
+                                $con = conectar();
+                                $query = "SELECT *FROM as_categoria";
+                                $result = $con->query($query);
+                                if ($con->affected_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-3 control-label">Categoria de Producto</label>
-                        <div class="col-xs-9 selectContainer">
-                            <select class="form-control" name="size" id="size">
-<?php
-$con = conectar();
-$query = "SELECT *FROM as_categoria";
-$result = $con->query($query);
-if ($con->affected_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
-    }
-}
-?>
+                        <div class="col-sm-6">
+                            <label class="control-label">Si Tiene Descuento ¿Es Porcentaje?</label>
+                            <select class="form-control" name="esdescuento" id="esdescuento">
+                                <option value='0'>EL DESCUENTO ES EN VALOR MONETARIO ($)</option>
+                                <option value='1'>EL DESCUENTO ES POR PORCENTAJE (%)</option>
                             </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Valor del Descuento (0=SIN DESCUENTO)</label>
+                            <input type="text" class="form-control" id="descuento" name="descuento" onfocus="borrar()" placeholder="Si el producto no tiene descuento escriba 0">
                         </div>
                     </div>
                     <div id="msj1">
@@ -170,13 +173,13 @@ if ($con->affected_rows > 0) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="
-                if (document.servicio.nombre.value.length == 0 || document.servicio.descripcion.value.length == 0 || document.servicio.precio.value.length == 0 || document.servicio.impuesto.value.length == 0 || document.servicio.size.value.length == 0 || document.servicio.existencia.value.length == 0 || document.servicio.unidad.value.length == 0 || document.servicio.preciov.value.length == 0) {
-                    borrar();
-                    mensage('Rellene todos los campos del formulario!', 'danger', 'msj1');
-                } else {
-                    borrar();
-                    guardar();
-                }
+                        if (document.servicio.nombre.value.length == 0 || document.servicio.descripcion.value.length == 0 || document.servicio.precio.value.length == 0 || document.servicio.impuesto.value.length == 0 || document.servicio.size.value.length == 0 || document.servicio.existencia.value.length == 0 || document.servicio.unidad.value.length == 0 || document.servicio.preciov.value.length == 0) {
+                            borrar();
+                            mensage('Rellene todos los campos del formulario!', 'danger', 'msj1');
+                        } else {
+                            borrar();
+                            guardar();
+                        }
                         ">Guardar Producto</button>
             </div>
         </div>
@@ -196,66 +199,67 @@ if ($con->affected_rows > 0) {
                 <form class="form-horizontal" id="servicio2" name="servicio2">
                     <input type="hidden" class="form-control" id="id" name="id">
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Nombre</label>
-
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre2" name="nombre2" onfocus="borrar()" placeholder="Nombre Aqui...">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Descripcion</label>
-
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Descripcion</label>
                             <input type="text" class="form-control" id="descripcion2" name="descripcion2" onfocus="borrar()" placeholder="Descripcion Aqui...">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Precio</label>
-
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="precio2" name="precio2" onfocus="borrar()" placeholder="Precio...">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Precio Compra</label>
+                            <input type="number" class="form-control" id="precio2" name="precio2" onfocus="borrar()" placeholder="Precio de compra del producto...">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Precio Venta</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Precio Venta</label>
                             <input type="number" class="form-control" id="preciov2" name="preciov2" onfocus="borrar()" placeholder="Precio de venta al público...">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Existencia Producto</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Existencia Producto</label>
                             <input type="number" class="form-control" id="existencia2" name="existencia2" onfocus="borrar()" placeholder="Existencia del producto en inventario...">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inputName" class="col-sm-2 control-label">Unidad de Medida</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Unidad de Medida</label>
                             <input type="text" maxlength="250" class="form-control" id="unidad2" name="unidad2" onfocus="borrar()" placeholder="Unidad de medida del producto (KG, LIBRA, X UNIDAD, BOLSA, PACA, CUÑETE, GALON, ETC)...">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="inputName" class="col-sm-3 control-label">Impuesto IVA/otro</label>
-
-                        <div class="col-sm-9">
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Impuesto IVA/otro</label>
                             <input type="number" class="form-control" id="impuesto2" name="impuesto2" onfocus="borrar()" placeholder="Escriba asi: para 16% --> 16, para 5.5% --> 5.5">
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="control-label">Categoria de Producto</label>
+                            <select class="form-control" name="size2" id="size2">
+                                <?php
+                                $con2 = conectar();
+                                $query2 = "SELECT *FROM as_categoria";
+                                $result2 = $con2->query($query2);
+                                if ($con2->affected_rows > 0) {
+                                    while ($row = $result2->fetch_assoc()) {
+                                        echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
+                                    }
+                                }
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-xs-3 control-label">Categoria de Producto</label>
-                        <div class="col-xs-9 selectContainer">
-                            <select class="form-control" name="size2" id="size2">
-<?php
-$con = conectar();
-$query = "SELECT *FROM as_categoria";
-$result = $con->query($query);
-if ($con->affected_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "<option value='" . $row['id'] . "'>" . $row['nombre'] . "</option>";
-    }
-}
-?>
+                        <div class="col-sm-6">
+                            <label class="control-label">Si Tiene Descuento ¿Es Porcentaje?</label>
+                            <select class="form-control" name="esdescuento2" id="esdescuento2">
+                                <option value='0'>EL DESCUENTO ES EN VALOR MONETARIO ($)</option>
+                                <option value='1'>EL DESCUENTO ES POR PORCENTAJE (%)</option>
                             </select>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="inputName" class="control-label">Valor del Descuento (0=SIN DESCUENTO)</label>
+                            <input type="text" class="form-control" id="descuento2" name="descuento2" onfocus="borrar()" placeholder="Si el producto no tiene descuento escriba 0">
                         </div>
                     </div>
                     <div id="msj2">
@@ -265,13 +269,13 @@ if ($con->affected_rows > 0) {
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-success" onclick="
-                if (document.servicio2.nombre2.value.length == 0 || document.servicio2.descripcion2.value.length == 0 || document.servicio2.precio2.value.length == 0 || document.servicio2.impuesto2.value.length == 0 || document.servicio2.size2.value.length == 0 || document.servicio2.existencia2.value.length == 0 || document.servicio2.unidad2.value.length == 0 || document.servicio2.preciov2.value.length == 0) {
-                    borrar();
-                    mensage('Rellene todos los campos del formulario!', 'danger', 'msj2');
-                } else {
-                    borrar();
-                    modificar();
-                }
+                        if (document.servicio2.nombre2.value.length == 0 || document.servicio2.descripcion2.value.length == 0 || document.servicio2.precio2.value.length == 0 || document.servicio2.impuesto2.value.length == 0 || document.servicio2.size2.value.length == 0 || document.servicio2.existencia2.value.length == 0 || document.servicio2.unidad2.value.length == 0 || document.servicio2.preciov2.value.length == 0) {
+                            borrar();
+                            mensage('Rellene todos los campos del formulario!', 'danger', 'msj2');
+                        } else {
+                            borrar();
+                            modificar();
+                        }
                         ">Guardar Producto</button>
             </div>
         </div>
